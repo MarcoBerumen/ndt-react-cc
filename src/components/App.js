@@ -6,15 +6,17 @@ class App extends Component {
   render() {
     return (
       <div className="App container-fluid">
-        <h2 className='mb-3'>Little Accountant</h2>
-        <div className="row">
-          <div className="col-lg-12 col-md-12 col-12">
+        <header role='banner'>
+          <h1 id='app-title' className='h2 text-start my-4'>Little Accountant</h1>
+        </header>
+        <main className="row">
+          <section className="col-lg-12 col-md-12 col-12">
             <InputForm />
-          </div>
-          <div className="col-lg-12 col-md-12 col-12">
+          </section>
+          <section className="col-lg-12 col-md-12 col-12">
             <BalanceOutput />
-          </div>
-        </div>
+          </section>
+        </main>
       </div>
     );
   }

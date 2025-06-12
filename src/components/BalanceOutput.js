@@ -6,51 +6,130 @@ import * as utils from '../utils';
 class BalanceOutput extends Component {
   render() {
     if (!this.props.userInput.format) {
-      return null;
+      return (
+      <div className="output" role="status" aria-live="polite">
+        <div className="alert alert-info" role="alert">
+          <p className="mb-0">
+            <span className="sr-only">Information: </span>
+            No data to display. Please submit the form to generate a balance report.
+          </p>
+        </div>
+      </div>
+      )
     }
+const { totalDebit, totalCredit, balance, userInput } = this.props;
 
     return (
-      <div className='output mt-4'>
-        <p>
-          Total Debit: {this.props.totalDebit} Total Credit: {this.props.totalCredit}
-          <br />
-          Balance from account {this.props.userInput.startAccount || '*'}
-          {' '}
-          to {this.props.userInput.endAccount || '*'}
-          {' '}
-          from period {utils.dateToString(this.props.userInput.startPeriod)}
-          {' '}
-          to {utils.dateToString(this.props.userInput.endPeriod)}
-        </p>
-        {this.props.userInput.format === 'CSV' ? (
-          <pre>{utils.toCSV(this.props.balance)}</pre>
-        ) : null}
-        {this.props.userInput.format === 'HTML' ? (
-          <div className="table-responsive">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>ACCOUNT</th>
-                  <th>DESCRIPTION</th>
-                  <th>DEBIT</th>
-                  <th>CREDIT</th>
-                  <th>BALANCE</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.props.balance.map((entry, i) => (
-                  <tr key={i}>
-                    <th scope="row">{entry.ACCOUNT}</th>
-                    <td>{entry.DESCRIPTION}</td>
-                    <td>{entry.DEBIT}</td>
-                    <td>{entry.CREDIT}</td>
-                    <td>{entry.BALANCE}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      <div className='output' role="region" aria-labelledby="output-title" aria-live="polite">
+        <h3 id="output-title" className="sr-only">Balance Report Results</h3>
+        
+        {/* Summary Information */}
+        <div className="alert alert-secondary" role="status" aria-labelledby="summary-title">
+          <h4 id="summary-title" className="sr-only">Financial Summary</h4>
+          <p className="mb-2">
+            <strong>Total Debit:</strong> 
+            <span className="ml-1" aria-label={`${totalDebit} dollars`}>
+              {totalDebit.toLocaleString()}
+            </span>
+            <span className="mx-2">|</span>
+            <strong>Total Credit:</strong> 
+            <span className="ml-1" aria-label={`${totalCredit} dollars`}>
+              {totalCredit.toLocaleString()}
+            </span>
+          </p>
+          <p className="mb-0">
+            <strong>Balance from account</strong> 
+            <span className="mx-1" aria-label={`Account ${userInput.startAccount || 'all'}`}>
+              {userInput.startAccount || '*'}
+            </span>
+            <strong>to</strong>
+            <span className="mx-1" aria-label={`Account ${userInput.endAccount || 'all'}`}>
+              {userInput.endAccount || '*'}
+            </span>
+            <strong>from period</strong>
+            <span className="mx-1">
+              {utils.dateToString(userInput.startPeriod)}
+            </span>
+            <strong>to</strong>
+            <span className="ml-1">
+              {utils.dateToString(userInput.endPeriod)}
+            </span>
+          </p>
+        </div>
+
+        {/* CSV Output */}
+        {userInput.format === 'CSV' && (
+          <div role="region" aria-labelledby="csv-title">
+            <h4 id="csv-title" className="h5 mb-3">CSV Format Output</h4>
+            <pre 
+              className="bg-light p-3 border rounded"
+              role="textbox" 
+              aria-readonly="true"
+              aria-label="CSV formatted balance data"
+              tabIndex="0"
+              style={{ fontSize: '0.875rem', maxHeight: '400px', overflowY: 'auto' }}
+            >
+              {utils.toCSV(balance)}
+            </pre>
           </div>
-        ) : null}
+        )}
+
+        {/* HTML Table Output */}
+        {userInput.format === 'HTML' && (
+          <div role="region" aria-labelledby="table-title">
+            <h4 id="table-title" className="h5 mb-3">Account Balance Details</h4>
+            <div className="table-responsive">
+              <table 
+                className="table table-bordered table-striped w-100" 
+                role="table"
+                aria-labelledby="table-title"
+                aria-describedby="table-description"
+              >
+                <caption id="table-description" className="sr-only">
+                  Balance details showing {balance.length} accounts with their debit, credit, and balance amounts
+                </caption>
+                <thead>
+                  <tr role="row">
+                    <th scope="col" aria-sort="none">Account Number</th>
+                    <th scope="col" aria-sort="none">Description</th>
+                    <th scope="col" aria-sort="none" className="text-right">Debit Amount</th>
+                    <th scope="col" aria-sort="none" className="text-right">Credit Amount</th>
+                    <th scope="col" aria-sort="none" className="text-right">Balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {balance.map((entry, i) => {
+                    const balanceClass = entry.BALANCE > 0 ? 'text-success' : 
+                                       entry.BALANCE < 0 ? 'text-danger' : 'text-muted';
+                    return (
+                      <tr key={i} role="row">
+                        <th scope="row" aria-label={`Account ${entry.ACCOUNT}`}>
+                          {entry.ACCOUNT}
+                        </th>
+                        <td>{entry.DESCRIPTION}</td>
+                        <td className="text-right" aria-label={`Debit: ${entry.DEBIT} dollars`}>
+                          {entry.DEBIT.toLocaleString()}
+                        </td>
+                        <td className="text-right" aria-label={`Credit: ${entry.CREDIT} dollars`}>
+                          {entry.CREDIT.toLocaleString()}
+                        </td>
+                        <td 
+                          className={`text-right font-weight-bold ${balanceClass}`}
+                          aria-label={`Balance: ${entry.BALANCE} dollars, ${
+                            entry.BALANCE > 0 ? 'positive' : 
+                            entry.BALANCE < 0 ? 'negative' : 'zero'
+                          }`}
+                        >
+                          {entry.BALANCE.toLocaleString()}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
