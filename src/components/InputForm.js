@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { accounts, journal } from '../data';
-import * as actions from '../actions';
-import * as utils from '../utils';
+import { accounts, journal } from '../utils/data';
+import * as actions from '../redux/actions';
+import * as utils from '../utils/utils';
 
 class InputForm extends Component {
   state = {

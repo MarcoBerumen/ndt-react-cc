@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as utils from '../utils';
+import * as utils from '../utils/utils';
 
 class BalanceOutput extends Component {
 

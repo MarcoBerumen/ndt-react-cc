@@ -1,3 +1,98 @@
+# Coding Challenge Project
+
+## Project Purpose
+
+This is a React-based coding challenge application built with Redux for state management. The project demonstrates modern React development practices, including component-based architecture, state management patterns, and comprehensive testing strategies.
+
+### Key Features
+
+- **React 18** upgraded from React 15 to React 18
+- **Redux** state management with Redux Thunk for async operations
+- **Comprehensive testing** setup with Jest and React Testing Library
+- **ESLint** configuration for code quality and consistency
+- **Modular architecture** for scalability and maintainability
+
+## Prerequisites
+
+- **Node.js**: Version 16.x or higher (recommended: 18.x)
+- **Package Manager**: npm (comes with Node.js) or yarn
+
+To check your Node.js version:
+```bash
+node --version
+```
+
+## Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/MarcoBerumen/ntd-react-cc.git
+   cd ntd-react-cc
+   ```
+
+2. **Install dependencies**
+   
+   Using npm:
+   ```bash
+   npm install
+   ```
+   
+   Or using yarn:
+   ```bash
+   yarn install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm start
+   # or
+   yarn start
+   ```
+
+4. **Open your browser**
+   
+   Navigate to `http://localhost:3000` to view the application.
+
+## Available Scripts
+
+- `npm start` - Runs the app in development mode with source maps enabled
+- `npm test` - Launches the test runner
+- `npm run build` - Builds the app for production to the `build` folder
+- `npm run lint` - Runs ESLint to check code quality and style
+
+## Testing
+
+The project uses Jest and React Testing Library for comprehensive testing:
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm test -- --watch
+
+# Run tests with coverage
+npm test -- --coverage
+```
+
+### Test Structure
+- Unit tests for individual components
+- Integration tests for connected components
+- Utility function tests
+
+## Development Guidelines
+
+### Code Quality
+- ESLint is configured to enforce consistent code style
+- Run `npm run lint` before committing changes
+- Follow React best practices and hooks patterns
+
+### State Management
+- Use Redux for global state that needs to be shared across components
+- Keep local component state for UI-specific data
+- Use Redux Thunk for async operations
+
+
 # Coding Challenge
 
 Your task is to finish the Redux `mapStateToProps` function to a program to help an accountant to get balances from accounting journals.
@@ -53,7 +148,7 @@ After you're done, commit your changes, push to your GitHub and send us a link.
  
  -3. Accessibility & Usability • Use semantic HTML elements like <form>, <label>, <fieldset>, <main>, etc. • Link <label> elements with their corresponding <input> fields using the htmlFor attribute. • Make all interactive elements (inputs, buttons) accessible using only the keyboard (Tab, Enter). • Add ARIA roles and aria-labels where applicable to help screen readers understand the layout. • Ensure color contrast is sufficient for readability. ⸻ 
  
- 4. Core Feature Completion • Confirm the app can interpret all valid formats of the input string as defined in the prompt. • Validate corner cases such as using * for first/last period or account. • Handle ranges of accounts and periods correctly and ensure output formatting is accurate for both HTML and CSV. • If time allows, add sample outputs for each case to validate the results. ⸻ 
+ -4. Core Feature Completion • Confirm the app can interpret all valid formats of the input string as defined in the prompt. • Validate corner cases such as using * for first/last period or account. • Handle ranges of accounts and periods correctly and ensure output formatting is accurate for both HTML and CSV. • If time allows, add sample outputs for each case to validate the results. ⸻ 
  
  5. State Management • You’re using Redux, which is great. Ensure all input processing and balance calculations are managed via Redux actions and reducers. • Keep Redux state cleanly organized and avoid placing state logic inside components. • Consider using selectors for derived data (e.g., filtered accounts), which helps separate logic from rendering. ⸻ 
  
@@ -67,8 +162,8 @@ After you're done, commit your changes, push to your GitHub and send us a link.
  
  -10. Error Handling • Add validation for user input to catch invalid formats or logical issues (e.g., end date before start date). • Show clear, user-friendly error messages when input is incorrect or incomplete. • Reset or clear output and errors appropriately between submissions. ⸻ 
  
- 11. README & Setup • Expand the README to include: • Project purpose and feature summary. • Installation steps (what version of Node, if Yarn or NPM should be used). • A short explanation of the project structure. • Screenshots or sample inputs/outputs. • Known limitations or future improvements. ⸻ 
+ -11. README & Setup • Expand the README to include: • Project purpose and feature summary. • Installation steps (what version of Node, if Yarn or NPM should be used). • A short explanation of the project structure. • Screenshots or sample inputs/outputs. • Known limitations or future improvements. ⸻ 
  
- 12. Modularity & Maintainability • Create a clear folder structure like: src/ components/ redux/ actions/ reducers/ selectors.js utils/ App.js • Move any parsing or formatting logic to utility files (utils.js) so components stay clean. • Add inline comments explaining key logic, especially around how the input string is parsed and how the filtering works. 
+ -12. Modularity & Maintainability • Create a clear folder structure like: src/ components/ redux/ actions/ reducers/ selectors.js utils/ App.js • Move any parsing or formatting logic to utility files (utils.js) so components stay clean. • Add inline comments explaining key logic, especially around how the input string is parsed and how the filtering works. 
  
  Following these steps will make your app more robust, scalable, and aligned with professional best practices. Great job so far—you’re close to a polished, production-ready solution!
