@@ -4,8 +4,106 @@ import { connect } from 'react-redux';
 import * as utils from '../utils';
 
 class BalanceOutput extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      errors: [],
+    };
+  }
+
+  componentDidMount() {
+    this.validateInput();
+  }
+
+  componentDidUpdate(prevProps) {
+    // Re-validate when userInput changes
+    if (prevProps.userInput !== this.props.userInput) {
+      this.validateInput();
+    }
+  }
+
+  validateInput = () => {
+    const errors = [];
+    const { userInput } = this.props;
+
+    // Validate date range
+    if (userInput.startPeriod && userInput.endPeriod) {
+      if (userInput.startPeriod > userInput.endPeriod) {
+        errors.push('Start date cannot be after end date');
+      }
+    }
+
+    // Validate account range
+    if (userInput.startAccount && userInput.endAccount) {
+      if (userInput.startAccount > userInput.endAccount) {
+        errors.push('Start account number cannot be greater than end account number');
+      }
+    }
+
+    // Validate format
+    if (userInput.format && !['CSV', 'HTML'].includes(userInput.format)) {
+      errors.push('Invalid output format. Please select CSV or HTML');
+    }
+
+    // Validate date objects
+    if (userInput.startPeriod && !(userInput.startPeriod instanceof Date)) {
+      errors.push('Invalid start date format');
+    }
+
+    if (userInput.endPeriod && !(userInput.endPeriod instanceof Date)) {
+      errors.push('Invalid end date format');
+    }
+
+    // Check for future dates (optional business rule)
+    const today = new Date();
+    if (userInput.startPeriod && userInput.startPeriod > today) {
+      errors.push('Start date cannot be in the future');
+    }
+
+    if (userInput.endPeriod && userInput.endPeriod > today) {
+      errors.push('End date cannot be in the future');
+    }
+
+    this.setState({ errors });
+  };
+
+  renderErrorMessages = () => {
+    if (this.state.errors.length === 0) return null;
+
+    return (
+      <div className="alert alert-danger" role="alert" aria-live="assertive">
+        <h4 className="alert-heading">
+          <i className="fas fa-exclamation-triangle" aria-hidden="true"></i>
+          Input Validation Errors
+        </h4>
+        <ul className="mb-0" role="list">
+          {this.state.errors.map((error, index) => (
+            <li key={index}>{error}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+
   render() {
-    if (!this.props.userInput.format) {
+
+    if (this.state.errors.length > 0) {
+      return (
+        <div className="output" role="status" aria-live="polite">
+          {this.renderErrorMessages()}
+          {/* Still show the form prompt */}
+          <div className="alert alert-info" role="alert">
+            <p className="mb-0">
+              <span className="sr-only">Information: </span>
+              Please correct the errors above and resubmit the form.
+            </p>
+          </div>
+        </div>
+      );
+    }
+    
+    if (!this.props.userInput.format || this.props.balance.length === 0) {
       return (
       <div className="output" role="status" aria-live="polite">
         <div className="alert alert-info" role="alert">
@@ -17,7 +115,9 @@ class BalanceOutput extends Component {
       </div>
       )
     }
-const { totalDebit, totalCredit, balance, userInput } = this.props;
+    const { totalDebit, totalCredit, balance, userInput } = this.props;
+
+    
 
     return (
       <div className='output' role="region" aria-labelledby="output-title" aria-live="polite">
@@ -159,6 +259,8 @@ BalanceOutput.propTypes = {
 export default connect(state => {
   let balance = [];
   let { endAccount, endPeriod, startAccount, startPeriod } = state.userInput;
+  try {
+    
   if ( isNaN(startAccount) ) startAccount = -Infinity;
   if ( isNaN(endAccount) ) endAccount = Infinity;
   if ( startPeriod instanceof Date && isNaN(startPeriod.getTime()) ) startPeriod = new Date(0); // Default to epoch start
@@ -231,4 +333,13 @@ export default connect(state => {
     totalDebit,
     userInput: state.userInput
   };
+  } catch (error) {
+    console.error('Error calculating balance:', error);
+    return {
+      balance: [],
+      totalCredit: 0,
+      totalDebit: 0,
+      userInput: state.userInput || {}
+    };
+  }
 })(BalanceOutput);

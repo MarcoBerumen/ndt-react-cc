@@ -2,13 +2,22 @@
   "name": "coding-challenge",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "devDependencies": {
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
+    "@jest/globals": "^30.0.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "babel-jest": "^30.0.0",
     "eslint": "^3.16.1",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.4.1",
     "eslint-plugin-react-hooks": "^6.0.0",
     "identity-obj-proxy": "^3.0.0",
+    "jest": "^30.0.0",
     "jest-environment-jsdom": "^30.0.0",
     "react-scripts": "0.9.5"
   },
@@ -23,7 +32,7 @@
   "scripts": {
     "start": "GENERATE_SOURCEMAP=true react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.{js,jsx}"
   }

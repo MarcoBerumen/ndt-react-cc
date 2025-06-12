@@ -13,7 +13,7 @@ class App extends Component {
           <section className="col-lg-12 col-md-12 col-12">
             <InputForm />
           </section>
-          <section className="col-lg-12 col-md-12 col-12">
+          <section className="col-lg-12 col-md-12 col-12 mt-2">
             <BalanceOutput />
           </section>
         </main>

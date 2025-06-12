@@ -61,11 +61,11 @@ After you're done, commit your changes, push to your GitHub and send us a link.
  
  7. Component Design & Reusability • Break down components into smaller units with a single responsibility (e.g., a separate OutputTable or ErrorDisplay). • Avoid mixing display logic with input parsing or data transformation inside components. • Move repeated or shared logic into helper functions or utility modules. ⸻ 
  
- 8. Code Style & Consistency • Use a linter like ESLint and a formatter like Prettier to maintain consistent code style. • Stick to consistent naming patterns (camelCase for variables, PascalCase for components). • Remove unused code or commented-out blocks. • Keep files short and well-organized. ⸻ 
+ -8. Code Style & Consistency • Use a linter like ESLint and a formatter like Prettier to maintain consistent code style. • Stick to consistent naming patterns (camelCase for variables, PascalCase for components). • Remove unused code or commented-out blocks. • Keep files short and well-organized. ⸻ 
  
- 9. Test Coverage & Quality • Add unit tests using Jest and React Testing Library. • Write tests for at least: • Rendering of main components with different props. • Input parsing logic with various formats. • Redux reducer logic and actions. • Include edge case tests (e.g., missing input fields, malformed input). ⸻ 
+ -9. Test Coverage & Quality • Add unit tests using Jest and React Testing Library. • Write tests for at least: • Rendering of main components with different props. • Input parsing logic with various formats. • Redux reducer logic and actions. • Include edge case tests (e.g., missing input fields, malformed input). ⸻ 
  
- 10. Error Handling • Add validation for user input to catch invalid formats or logical issues (e.g., end date before start date). • Show clear, user-friendly error messages when input is incorrect or incomplete. • Reset or clear output and errors appropriately between submissions. ⸻ 
+ -10. Error Handling • Add validation for user input to catch invalid formats or logical issues (e.g., end date before start date). • Show clear, user-friendly error messages when input is incorrect or incomplete. • Reset or clear output and errors appropriately between submissions. ⸻ 
  
  11. README & Setup • Expand the README to include: • Project purpose and feature summary. • Installation steps (what version of Node, if Yarn or NPM should be used). • A short explanation of the project structure. • Screenshots or sample inputs/outputs. • Known limitations or future improvements. ⸻ 
  
