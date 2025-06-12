@@ -150,8 +150,8 @@ BalanceOutput.propTypes = {
   userInput: PropTypes.shape({
     startAccount: PropTypes.number,
     endAccount: PropTypes.number,
-    startPeriod: PropTypes.date,
-    endPeriod: PropTypes.date,
+    startPeriod: PropTypes.instanceOf(Date),
+    endPeriod: PropTypes.instanceOf(Date),
     format: PropTypes.string
   }).isRequired
 };
