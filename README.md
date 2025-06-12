@@ -139,7 +139,7 @@ Parsing input fields and storing in Redux has already been implemented; it's up 
 After you're done, commit your changes, push to your GitHub and send us a link.
 
 
-*************** *************** REACT CODE CHALLENGE*************** ***************
+<!-- *************** *************** REACT CODE CHALLENGE*************** ***************
  Thank you for your submission! To help you achieve a 100% on this challenge, here are some detailed suggestions across each area of the evaluation: ⸻ 
  
  -1. Visual Fidelity • Make sure the user interface matches the provided screenshots or design exactly. • Pay attention to spacing between elements, font sizes, text alignment, and padding. • If you’re using plain CSS, consider using a utility-first CSS framework like Tailwind to enforce consistent spacing and styling. • Verify that headings, labels, and content areas are visually aligned and proportioned like the examples. ⸻ 
@@ -166,4 +166,4 @@ After you're done, commit your changes, push to your GitHub and send us a link.
  
  -12. Modularity & Maintainability • Create a clear folder structure like: src/ components/ redux/ actions/ reducers/ selectors.js utils/ App.js • Move any parsing or formatting logic to utility files (utils.js) so components stay clean. • Add inline comments explaining key logic, especially around how the input string is parsed and how the filtering works. 
  
- Following these steps will make your app more robust, scalable, and aligned with professional best practices. Great job so far—you’re close to a polished, production-ready solution!
+ Following these steps will make your app more robust, scalable, and aligned with professional best practices. Great job so far—you’re close to a polished, production-ready solution! -->
