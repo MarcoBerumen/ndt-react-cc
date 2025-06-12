@@ -10,7 +10,7 @@ class BalanceOutput extends Component {
     }
 
     return (
-      <div className='output'>
+      <div className='output mt-4'>
         <p>
           Total Debit: {this.props.totalDebit} Total Credit: {this.props.totalCredit}
           <br />
@@ -26,28 +26,30 @@ class BalanceOutput extends Component {
           <pre>{utils.toCSV(this.props.balance)}</pre>
         ) : null}
         {this.props.userInput.format === 'HTML' ? (
-          <table className="table">
-            <thead>
-              <tr>
-                <th>ACCOUNT</th>
-                <th>DESCRIPTION</th>
-                <th>DEBIT</th>
-                <th>CREDIT</th>
-                <th>BALANCE</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.props.balance.map((entry, i) => (
-                <tr key={i}>
-                  <th scope="row">{entry.ACCOUNT}</th>
-                  <td>{entry.DESCRIPTION}</td>
-                  <td>{entry.DEBIT}</td>
-                  <td>{entry.CREDIT}</td>
-                  <td>{entry.BALANCE}</td>
+          <div className="table-responsive">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>ACCOUNT</th>
+                  <th>DESCRIPTION</th>
+                  <th>DEBIT</th>
+                  <th>CREDIT</th>
+                  <th>BALANCE</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {this.props.balance.map((entry, i) => (
+                  <tr key={i}>
+                    <th scope="row">{entry.ACCOUNT}</th>
+                    <td>{entry.DESCRIPTION}</td>
+                    <td>{entry.DEBIT}</td>
+                    <td>{entry.CREDIT}</td>
+                    <td>{entry.BALANCE}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : null}
       </div>
     );

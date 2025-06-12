@@ -32,7 +32,7 @@ class InputForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <div className='form-group'>
+        <div className='form-group '>
           <label htmlFor="journal">Journal</label>
           <textarea className="form-control" id="journal" rows="3" value={this.state.journal} onChange={this.handleChange}></textarea>
         </div>
